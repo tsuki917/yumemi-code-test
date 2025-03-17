@@ -1,3 +1,10 @@
+import Header from "./ui/common/Header";
+
 export default function Home() {
-  return <div>Home</div>;
+  return (
+    <main>
+      <Header />
+      Home
+    </main>
+  );
 }

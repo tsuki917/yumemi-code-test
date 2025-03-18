@@ -17,8 +17,8 @@ export const CheckBoxList = ({
     <div className="flex justify-center">
       <ul className="grid grid-cols-4 w-full border">
         {prefs.map((pref, index) => (
-          <li key={index} className="border px-4 py-2">
-            <label className="block">
+          <li key={index} className="border">
+            <label className="block px-4 py-2">
               <input
                 type="checkbox"
                 checked={checkBoxList[index]}

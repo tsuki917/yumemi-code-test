@@ -6,9 +6,7 @@ import { Prefecture } from "../../type/types";
 type UseChecksResult = () => JSX.Element;
 
 export const useCheckBoxList = (prefs: Prefecture[]): UseChecksResult => {
-  const [checkBoxList, setCheckBoxList] = useState(() =>
-    prefs.map(() => false),
-  );
+  const [checkBoxList, setCheckBoxList] = useState(prefs.map(() => false));
 
   const handleCheckClick = (index: number) => {
     setCheckBoxList((checks) =>

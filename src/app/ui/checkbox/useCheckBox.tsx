@@ -3,10 +3,18 @@ import { JSX, useState } from "react";
 import { CheckBoxList } from "./CheckBoxList";
 import { Prefecture } from "../../type/types";
 
-type UseChecksResult = () => JSX.Element;
+type UseChecksResult = [
+  () => JSX.Element,
+  number[],
+  number | null,
+  number | null,
+];
 
 export const useCheckBoxList = (prefs: Prefecture[]): UseChecksResult => {
   const [checkBoxList, setCheckBoxList] = useState(prefs.map(() => false));
+  const [checkedIdList, setCheckedIdList] = useState<number[]>([]);
+  const [recentCheckedId, setRecentCheckedId] = useState<number | null>(null);
+  const [checkedIndex, setCheckedIndex] = useState<number | null>(null);
 
   const handleCheckClick = (index: number) => {
     setCheckBoxList((checks) =>
@@ -14,7 +22,22 @@ export const useCheckBoxList = (prefs: Prefecture[]): UseChecksResult => {
     );
   };
   // TODO: フェッチデータの変更
-  const handleCheckChange = () => {};
+  const handleCheckChange = (index: number) => {
+    const prefCode = index + 1;
+    const x = checkedIdList.indexOf(prefCode);
+    setCheckedIndex(x);
+    if (x < 0) {
+      setCheckedIdList((list) => [...list, prefCode]);
+      setRecentCheckedId(prefCode * -1);
+    } else {
+      setCheckedIdList(() => {
+        const c = [...checkedIdList];
+        c.splice(x, 1);
+        return c;
+      });
+      setRecentCheckedId(prefCode);
+    }
+  };
   const renderCheckBoxList = () => (
     <CheckBoxList
       checkBoxList={checkBoxList}
@@ -24,5 +47,5 @@ export const useCheckBoxList = (prefs: Prefecture[]): UseChecksResult => {
     />
   );
 
-  return renderCheckBoxList;
+  return [renderCheckBoxList, checkedIdList, recentCheckedId, checkedIndex];
 };

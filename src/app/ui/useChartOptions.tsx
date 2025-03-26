@@ -8,12 +8,16 @@ export const useChartOptions = (
   chartData: PopulationCompositionPerYear[],
   prefs: Prefecture[],
   checkedIdList: number[],
+  selectedDataIndex: number,
 ): Options | null => {
   const [options, setOptions] = useState<Options | null>(null);
   useEffect(() => {
     const op: Options = {
       title: {
-        text: "Chart Data",
+        text:
+          chartData.length > 0
+            ? chartData[0].data[selectedDataIndex].label
+            : "",
       },
       legend: {
         align: "right",
@@ -23,7 +27,7 @@ export const useChartOptions = (
       xAxis: {
         categories:
           chartData.length > 0
-            ? chartData[0].data[0].data.map((ele) => {
+            ? chartData[0].data[selectedDataIndex].data.map((ele) => {
                 return ele.year.toString();
               })
             : [],
@@ -44,7 +48,9 @@ export const useChartOptions = (
             type: "line",
             name: prefs[checkedIdList[index] - 1].prefName,
 
-            data: eachPrefData.data[0].data.map((ele) => ele.value),
+            data: eachPrefData.data[selectedDataIndex].data.map(
+              (ele) => ele.value,
+            ),
           };
         },
       ),
@@ -54,7 +60,7 @@ export const useChartOptions = (
     };
     setOptions(op);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chartData]);
+  }, [chartData, selectedDataIndex]);
 
   return options;
 };

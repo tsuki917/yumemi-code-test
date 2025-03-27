@@ -32,9 +32,9 @@ export default function DisplayComposition({ prefs }: Props) {
   );
 
   return (
-    <div>
+    <div className="w-full md:w-2/3 md:mx-auto">
       <SelectPref renderCheckBoxList={renderCheckBoxList} />
-      <div className="w-2/3 mx-auto mt-2">
+      <div className="mt-2">
         <h2 className="text-primary text-xl font-bold mb-2">人口構成グラフ</h2>
         <Select select={selectedDataIndex} handleChange={handleChange} />
         {options && <Charts options={options} />}

@@ -15,7 +15,7 @@ export const CheckBoxList = ({
 }: Props) => {
   return (
     <div className="flex justify-center">
-      <ul className="grid grid-cols-6 w-full gap-0.5 rounded-4xl">
+      <ul className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 w-full md:gap-0.5 rounded-4xl">
         {prefs.map((pref, index) => (
           <li key={index}>
             <label

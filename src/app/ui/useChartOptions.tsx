@@ -20,9 +20,9 @@ export const useChartOptions = (
             : "",
       },
       legend: {
-        align: "right",
-        verticalAlign: "top",
-        layout: "vertical",
+        align: "center",
+        verticalAlign: "bottom",
+        layout: "horizontal",
       },
       xAxis: {
         categories:
